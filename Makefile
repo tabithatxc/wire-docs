@@ -25,7 +25,15 @@ VENV_BIN = $(VENV_DIR)/bin
 .DEFAULT: docs
 .PHONY: docs
 docs:
+	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html pdf
+
+.PHONY: docs-html
+docs:
 	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html
+
+.PHONY: docs-pdf
+docs-pdf:
+	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean pdf
 
 # Only build part of the documentation
 # See 'exclude_patterns' in source/conf.py

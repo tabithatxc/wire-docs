@@ -1,11 +1,10 @@
 # Wire-docs
 
-Source files for wire-server documentation.
+Source files for wire-server documentation hosted on https://docs.wire.com
 
 ## Reading the documentation
 
 Visit https://docs.wire.com/
-
 
 ## Making contributions
 
@@ -18,17 +17,41 @@ for writing re-structured text (`*.rst`).
 [here is another one](http://docutils.sourceforge.net/docs/user/rst/cheatsheet.html).
 And [another one](https://sublime-and-sphinx-guide.readthedocs.io/en/latest/references.html).
 
+## Generate html output using docker
+
 Generate docs (using docker, so you don't need to install python dependencies yourself)
 
 ```
-make
+make docs
 ```
 
-You can also install the dependencies (requires `python3`) locally with `make dev-install` and
-enter a *development mode* by executing `make dev-srun` to start a local server and file watcher.
-Alternatively, if you already have all python dependencies installed globally, run `make html`.
+See build/html/index.html
+
+## Generate html output without docker
+
+Install the dependencies locally:
+
+* you need `python3`, then run `make dev-install`
+
+Once you have all python dependencies installed globally, run `make html`.
+
+## Local development environment for file watching
+
+Enter a *development mode* by running `make dev-srun` to start a local server and file watcher.
 
 Look at results by opening build/html/index.html
+
+Any changes you do leads to a rebuild, and refreshing your browser shows you the change.
+
+## Generating a PDF file
+
+NOTE: support is experimental and resulting pdf may not have great formatting. See the [rst2pdf](https://rst2pdf.org/static/manual.pdf) manual to improve the configuration here so the resulting PDF becomes nicer.
+
+Locally:
+* You need `rst2pdf`, then run `make pdf` and look at `./build/pdf/`
+
+Using docker:
+* `make docs-pdf`
 
 ## For maintainers (Wire employees)
 
