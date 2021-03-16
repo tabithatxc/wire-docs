@@ -46,6 +46,10 @@ exec:
 docker:
 	docker build -t $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) $(MKFILE_DIR)
 
+.PHONY: docker-push
+docker-push:
+	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG)
+
 .PHONY: push
 push:
 	aws s3 sync $(BUILDDIR)/html s3://origin-docs.wire.com/
