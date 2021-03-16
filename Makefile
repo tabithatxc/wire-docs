@@ -6,7 +6,7 @@ MKFILE_DIR = $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 DOCKER_USER   ?= quay.io/wire
 DOCKER_IMAGE  = alpine-sphinx
-DOCKER_TAG    ?= latest
+DOCKER_TAG    ?= pdf
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
@@ -28,7 +28,7 @@ docs:
 	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html pdf
 
 .PHONY: docs-html
-docs:
+docs-html:
 	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html
 
 .PHONY: docs-pdf
@@ -52,11 +52,6 @@ docker:
 .PHONY: push
 push:
 	aws s3 sync $(BUILDDIR)/html s3://origin-docs.wire.com/
-
-.PHONY: dev-install
-dev-install:
-	python3 -m venv --copies --clear $(VENV_DIR)
-	$(VENV_BIN)/pip3 install sphinx sphinx-autobuild recommonmark
 
 .PHONY: dev-run
 dev-run: export PATH := $(VENV_BIN):$(PATH)

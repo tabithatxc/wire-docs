@@ -31,7 +31,7 @@ See build/html/index.html
 
 Install the dependencies locally:
 
-* you need `python3`, then run `make dev-install`
+* you need `python3` and [poetry](https://github.com/python-poetry/poetry#installation) then run `poetry install`. If that fails you may not have a required system dependency, have a look at the [Dockerfile](./Dockerfile) for hints of packages you may need.
 
 Once you have all python dependencies installed globally, run `make html`.
 
