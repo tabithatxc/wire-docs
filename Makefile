@@ -15,9 +15,6 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = $(MKFILE_DIR)/src
 BUILDDIR      = $(MKFILE_DIR)/build
 
-VENV_DIR = $(MKFILE_DIR)/.venv
-VENV_BIN = $(VENV_DIR)/bin
-
 
 .PHONY: Makefile
 
@@ -25,15 +22,15 @@ VENV_BIN = $(VENV_DIR)/bin
 .DEFAULT: docs
 .PHONY: docs
 docs:
-	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html pdf
-
-.PHONY: docs-html
-docs-html:
 	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html
 
 .PHONY: docs-pdf
 docs-pdf:
 	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean pdf
+
+.PHONY: docs-all
+docs-all:
+	docker run --rm -v $$(pwd):/mnt $(DOCKER_USER)/$(DOCKER_IMAGE):$(DOCKER_TAG) make clean html pdf
 
 # Only build part of the documentation
 # See 'exclude_patterns' in source/conf.py
@@ -54,20 +51,15 @@ push:
 	aws s3 sync $(BUILDDIR)/html s3://origin-docs.wire.com/
 
 .PHONY: dev-run
-dev-run: export PATH := $(VENV_BIN):$(PATH)
 dev-run:
 	rm -rf "$(BUILDDIR)"
-	sphinx-autobuild \
+	source $$HOME/.poetry/env && \
+	poetry run sphinx-autobuild \
 		--port 3000 \
 		--host 127.0.0.1 \
 		-b html \
 		$(SPHINXOPTS) \
 		"$(SOURCEDIR)" "$(BUILDDIR)"
-
-.PHONY: dev-build
-dev-build: export PATH := $(VENV_BIN):$(PATH)
-dev-build:
-	make clean html
 
 .PHONY: help
 help:
@@ -76,4 +68,4 @@ help:
 # Catch-all target: route all unknown targets to Sphinx. This "converts" unknown targets into sub-commands (or more precicly
 # into `buildername`) of the $(SPHINXBUILD) CLI (see https://www.gnu.org/software/make/manual/html_node/Last-Resort.html).
 %:
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	@source $$HOME/.poetry/env && poetry run $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)

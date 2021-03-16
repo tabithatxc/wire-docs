@@ -34,7 +34,8 @@ extensions = [
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author, options).
 pdf_documents = [
-    ('index', 'all-docs', 'All the Wire Docs', 'Wire Swiss GmbH')
+    ('index', 'all-docs', 'All the Wire Docs', 'Wire Swiss GmbH'),
+    ('understand/index', 'understand', 'Understand', 'Wire Swiss GmbH')
 ]
 
 # Add section number to section

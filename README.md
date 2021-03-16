@@ -17,7 +17,11 @@ for writing re-structured text (`*.rst`).
 [here is another one](http://docutils.sourceforge.net/docs/user/rst/cheatsheet.html).
 And [another one](https://sublime-and-sphinx-guide.readthedocs.io/en/latest/references.html).
 
-## Generate html output using docker
+## Generate output using docker
+
+You need `docker` available on your system.
+
+### html
 
 Generate docs (using docker, so you don't need to install python dependencies yourself)
 
@@ -27,7 +31,17 @@ make docs
 
 See build/html/index.html
 
-## Generate html output without docker
+### pdf
+
+```
+make docs-pdf
+```
+
+Then see build/pdf/
+
+## Generate output without docker
+
+### Dependencies
 
 Install the dependencies locally:
 
@@ -35,23 +49,23 @@ Install the dependencies locally:
 
 Once you have all python dependencies installed globally, run `make html`.
 
-## Local development environment for file watching
+### Local development environment for file watching
 
-Enter a *development mode* by running `make dev-srun` to start a local server and file watcher.
+Enter a *development mode* by running `make dev-run` to start a local server and file watcher.
 
-Look at results by opening build/html/index.html
+Look at results by opening build/html/index.html which will auto-update whenever files under ./src change.
 
-Any changes you do leads to a rebuild, and refreshing your browser shows you the change.
+### Generating html output
 
-## Generating a PDF file
+```
+make html
+```
+
+### Generating a PDF file
 
 NOTE: support is experimental and resulting pdf may not have great formatting. See the [rst2pdf](https://rst2pdf.org/static/manual.pdf) manual to improve the configuration here so the resulting PDF becomes nicer.
 
-Locally:
-* You need `rst2pdf`, then run `make pdf` and look at `./build/pdf/`
-
-Using docker:
-* `make docs-pdf`
+You need `rst2pdf`, then run `make pdf` and look at `./build/pdf/`
 
 ## For maintainers (Wire employees)
 
