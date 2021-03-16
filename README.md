@@ -41,6 +41,8 @@ Then see build/pdf/
 
 ## Generate output without docker
 
+*Note: when switching from a docker-based building to a local building, you might encounter permission issues due to the build directory being owned by root. These can be solved by cleaning the build directory: `sudo rm -rf ./build/`*
+
 ### Dependencies
 
 Install the dependencies locally:
