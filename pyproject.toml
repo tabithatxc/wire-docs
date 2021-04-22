@@ -12,6 +12,9 @@ recommonmark = "^0.7.1"
 awscli = "^1.19.28"
 sphinx-autobuild = "^2021.3.14"
 sphinxcontrib-fulltoc = "^1.2.0"
+sphinxcontrib-redoc = "*"
+myst-parser = "*"
+
 
 [tool.poetry.dev-dependencies]
 

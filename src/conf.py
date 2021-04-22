@@ -30,7 +30,19 @@ version = "0.0.1"
 # ones.
 extensions = [
     'rst2pdf.pdfbuilder',
-    'sphinxcontrib.fulltoc'
+    'sphinxcontrib.fulltoc',
+    'myst_parser',
+    'sphinxcontrib.redoc'
+]
+
+
+redoc = [
+    {
+        'name': 'Batcomputer API',
+        'page': 'api',
+        'spec': 'swagger.json',
+        'embed': True,
+    },
 ]
 
 # Grouping the document tree into PDF files. List of tuples
