@@ -3,7 +3,6 @@
   fetchPypi,
 
   attrs,
-  mdit-py-plugins
 }:
 buildPythonPackage rec {
   pname = "markdown-it-py";
@@ -17,6 +16,5 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [
     attrs
-    mdit-py-plugins
   ];
 }
