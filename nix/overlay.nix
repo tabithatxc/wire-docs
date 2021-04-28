@@ -6,8 +6,11 @@ self: super: rec {
       python-bidi = pself.callPackage ./python/python-bidi.nix {};
       svg2rlg = pself.callPackage ./python/svg2rlg.nix {};
       svglib = pself.callPackage ./python/svglib.nix {};
+
+      markdown-it-py = pself.callPackage ./python/markdown-it-py.nix {};
+      mdit-py-plugins = pself.callPackage ./python/mdit-py-plugins.nix {};
       # sphinxcontrib-redoc = pself.callPackage ./python/mach-nix.nix {};
-      myst_parser = pself.callPackage ./python/myst_parser.nix {};
+      # myst_parser = pself.callPackage ./python/myst_parser.nix {};
     };
   });
 
