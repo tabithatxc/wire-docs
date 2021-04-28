@@ -7,5 +7,7 @@ run:
   args:
   - -exc
   - |
+    git clone git@github.com:wireapp/wire-server.git -b develop
+    cp wire-server/docs/* wire-docs/src/wire-server
     cd wire-docs
     make html push
