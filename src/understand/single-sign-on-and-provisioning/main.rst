@@ -8,11 +8,11 @@ Introduction
 
 Historically, wire has allowed team admins and owners to manage their users in the team settings app.  This does not scale...
 
-solution: SCIM!  (what's this?)
+Solution: SCIM! `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
 
 Historically, wire user auth is via phone or password.  This has security implications: ...; and does not scale either: ...
 
-solution: SAML!  (future work: oauth)
+Solution: SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_ (future work: Oauth)
 
 Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire.  You're looking at the administrator's manual.
 
