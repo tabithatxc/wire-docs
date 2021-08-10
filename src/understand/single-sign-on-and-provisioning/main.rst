@@ -1,18 +1,10 @@
 
-
-
-(sorry, this isn't really rst, i'm lazy.)
-
-
-
 TODO: import or reference design.rst somehow.
-
-
 
 TOC / TODO:
 
-
-# introduction
+Introduction
+============
 
 Historically, wire has allowed team admins and owners to manage their users in the team settings app.  This does not scale...
 
@@ -25,9 +17,11 @@ solution: saml!  (future work: oauth)
 wire comes with a backend module that provides saml single sign on and scim user provisioning for wire.  You're looking at the administrator's manual.
 
 
-# saml sso
+SAML/SSO 
+========
 
-## terminology and concepts
+Terminology and concepts
+------------------------
 
 - idp
 - authentication request
@@ -44,20 +38,25 @@ implemented, also document the curl way for everything?)
 deletion is tricky, but solved: the rest api end-point fails if the idp to be deleted is still authenticating active users in the team; but if you move all those users to other idps, you can delete it.  there is also a `force` query parameter in the delete end-point that removes all dangling users instead of failing.  what's to be decided is how to add that to team settings.  currently we need to fall back to the rest api for all this.
 
 
-## authentication
+Authentication
+--------------
 
 this could be kind of the user's manual.  or a summary of the user's manual plus a link, if we have it elsewhere.  (TODO: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
 
 
-# scim user provisioning
+SCIM user provisioning
+======================
 
-## terminology and concepts
+Terminology and concepts
+------------------------
 
 - scim peer (equivalent to idp)
 
-## scim peer management (in team settings or via curl)
+SCIM peer management (in team settings or via curl)
+---------------------------------------------------
 
-### scim security and authentication
+SCIM security and authentication
+................................
 
 we're using a very basic variant of oauth that just contains a header
 with a bearer token in all scim requests.  the token is created in
@@ -65,24 +64,26 @@ team settings and added to your scim peer somehow (see howtos or below
 (wherever we end up putting it) for azure, curl).
 
 
-### CRUD in team settings
+CRUD in team settings
+.....................
 
 did we implement this fully?  i think we may have:
 - we don't need the U in CRUD since we can just delete-and-recreate; and
 - we have just enough R for it to be secure (never expose the token after it's been handed over to the admin).
 
-
-## using scim with azure
+Using scim with azure
+---------------------
 
 we have a howto for saml, i think we'll need another one for scim.
 
-## using scim via curl
+Using scim via curl
+-------------------
 
 see `wireapp/wire-server/docs/reference/provisioning/` on github.
 
 
-
-# scim + sso
+SCIM + SSO 
+==========
 
 Using saml sso without scim is deprecated:
 
@@ -93,7 +94,8 @@ Using saml sso without scim is deprecated:
 so the recommended setup is saml + scim, and oauth + scim as soon as we have released the latter.
 
 
-## corner cases
+Corner cases
+------------
 
 why can't i disable sso once it's enabled? -> need implementing.  in order for this to work, we need to double-check that no sso users are still active in this team.
 
