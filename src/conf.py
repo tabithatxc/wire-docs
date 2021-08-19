@@ -42,6 +42,12 @@ pdf_documents = [
     ('understand/federation/index', 'wire_federation', 'Wire Federation', 'Wire Swiss GmbH')
 ]
 
+latex_documents = [
+    ('understand/federation/index', 'main.tex', 'Wire Federation', 'Wire Swiss GmbH', 'manual', 'False')
+]
+
+
+
 
 # Add section number to section
 referencespdf_use_numbered_links = True
