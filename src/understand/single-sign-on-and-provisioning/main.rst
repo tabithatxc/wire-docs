@@ -41,14 +41,12 @@ You're looking at the administrator's manual.
 SSO From the user perspective 
 =============================
 
-Wire offers the option to log in with SSO for Enterprise companies. 
-
 SSO allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
 No need to remember another password.
 
 When a team is set up on Wire, the administrators can provide users a login code or link that they can use to go straight to their company’s login page.
 
-Login with a Code (available for all companies who use SSO)
+Here is what this looks from a user's perspective:
 
 * Download Wire.
 * Select and copy the code that your company gave you / the administrator generated
@@ -97,6 +95,16 @@ This could be kind of the user's manual.
 Or a summary of the user's manual plus a link, if we have it elsewhere. 
 
 (TODO: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
+
+Setting up SSO externally
+-------------------------
+
+TODO: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
+
+Setting up SSO internally
+-------------------------
+
+TODO: Integrate https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
 
 
 SCIM user provisioning
