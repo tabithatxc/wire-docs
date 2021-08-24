@@ -38,6 +38,29 @@ You're looking at the administrator's manual.
     The reason is if you only use SSO, but do not configure/implement SCIM, you will experience reduced functionality.
     In particular, without SCIM all Wire users will be named according their e-mail address and won’t have any rich profiles.
 
+SSO From the user perspective 
+=============================
+
+Wire offers the option to log in with SSO for Enterprise companies. 
+
+SSO allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
+No need to remember another password.
+
+When a team is set up on Wire, the administrators can provide users a login code or link that they can use to go straight to their company’s login page.
+
+Login with a Code (available for all companies who use SSO)
+
+* Download Wire.
+* Select and copy the code that your company gave you / the administrator generated
+* Open Wire.
+  * Wire may detect the code on your clipboard and open a pop-up window with a text field. Wire will automatically put the code into the text field.
+  * If so, click Log in and go to step 8.
+* If no pop-up: click Login on the first screen.
+* Click Enterprise Login.
+* A pop-up will appear. In the text field, paste or type the code your company gave you.
+* Click Log in.
+* Wire will load your company’s login page: Log in with your company credentials.
+
 
 SAML/SSO 
 ========
