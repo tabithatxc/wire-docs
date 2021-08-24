@@ -6,6 +6,8 @@ TOC / TODO:
 Introduction
 ============
 
+This page is intended as a manual for administrator users in need of setting up SSO and provisionning users using SCIM on their installation of Wire.
+
 Historically, wire has allowed team admins and owners to manage their users in the team settings app.  This does not scale...
 
 Solution: SCIM! `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
