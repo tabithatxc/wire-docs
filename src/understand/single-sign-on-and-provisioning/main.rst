@@ -29,7 +29,14 @@ Solution: SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/
     An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
     -- Wikipedia
 
-Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire.  You're looking at the administrator's manual.
+Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire. 
+
+You're looking at the administrator's manual.
+
+.. note::
+    Note that it is recommended to use both SSO and SCIM (as opposed to just SSO alone). 
+    The reason is if you only use SSO, but do not configure/implement SCIM, you will experience reduced functionality.
+    In particular, without SCIM all Wire users will be named according their e-mail address and won’t have any rich profiles.
 
 
 SAML/SSO 
