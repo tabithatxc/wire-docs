@@ -125,13 +125,45 @@ We're using a very basic variant of oauth that just contains a header with a bea
 
 The token is created in team settings and added to your scim peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
 
+Generating a SCIM token 
+.......................
+
+These are the steps to generate a new SCIM token, which you will need to provide to your identity provider (IdP), along with the target API URL, to enable SCIM provisionning.
+
+* Step 1: Go to https://teams.wire.com/settings ( Here replace "wire.com" with your own domain if you have an on-premise installation of Wire ).
+
+.. image:: token-step-1.png
+
+* Step 2: In the left menu, go to «Customization»
+
+.. image:: token-step-2.png
+
+* Step 3: Go to «Automated User Management (SCIM)»
+
+.. image:: token-step-3.png
+
+* Step 4: Click the «down» arrow to expand
+
+.. image:: token-step-4.png
+
+* Step 5: Click «Generate token», if your password is requested, enter it.
+
+.. image:: token-step-5.png
+
+* Step 6: A token is generated, you can copy it
+
+.. image:: token-step-6.png
+
+Tokens are now listed in this SCIM area, you can generate up to 8.
+
+TODO: Add arrows/red lines to the images for even more precise instructions.
+
 CRUD in team settings
 .....................
 
-Did we implement this fully? I think we may have:
-
-- We don't need the U in CRUD since we can just delete-and-recreate; and
-- We have just enough R for it to be secure (never expose the token after it's been handed over to the admin).
+TODO: Did we implement this fully? I think we may have:
+TODO: - We don't need the U in CRUD since we can just delete-and-recreate; and
+TODO: - We have just enough R for it to be secure (never expose the token after it's been handed over to the admin).
 
 Using SCIM with azure
 ---------------------
