@@ -66,12 +66,12 @@ SAML/SSO
 Terminology and concepts
 ------------------------
 
-- IdP (https://en.wikipedia.org/wiki/Identity_provider)
-- Authentication request
-- Authentication response
-- How does the auth flow work (see ./design.rst)
-- [Everything we discuss in https://docs.wire.com/how-to/single-sign-on/trouble-shooting.html, https://docs.wire.com/how-to/single-sign-on/index.html]
-- [Everything that comes to mind while writing this manual]
+TODO: - IdP (https://en.wikipedia.org/wiki/Identity_provider)
+TODO: - Authentication request
+TODO: - Authentication response
+TODO: - How does the auth flow work (see ./design.rst)
+TODO: - [Everything we discuss in https://docs.wire.com/how-to/single-sign-on/trouble-shooting.html, https://docs.wire.com/how-to/single-sign-on/index.html]
+TODO: - [Everything that comes to mind while writing this manual]
 
 IdP management (in team settings or via curl)
 ---------------------------------------------
