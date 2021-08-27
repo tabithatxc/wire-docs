@@ -1,7 +1,7 @@
 
-TODO: import or reference design.rst somehow.
+``TODO``: Import or reference design.rst somehow.
 
-TOC / TODO:
+``TODO``: Table of contents
 
 Introduction
 ============
@@ -66,39 +66,39 @@ SAML/SSO
 Terminology and concepts
 ------------------------
 
-TODO: - IdP (https://en.wikipedia.org/wiki/Identity_provider)
-TODO: - Authentication request
-TODO: - Authentication response
-TODO: - How does the auth flow work (see ./design.rst)
-TODO: - [Everything we discuss in https://docs.wire.com/how-to/single-sign-on/trouble-shooting.html, https://docs.wire.com/how-to/single-sign-on/index.html]
-TODO: - [Everything that comes to mind while writing this manual]
+* ``TODO``: IdP (https://en.wikipedia.org/wiki/Identity_provider)
+* ``TODO``: Authentication request
+* ``TODO``: Authentication response
+* ``TODO``: How does the auth flow work (see ./design.rst)
+* ``TODO``: [Everything we discuss in https://docs.wire.com/how-to/single-sign-on/trouble-shooting.html, https://docs.wire.com/how-to/single-sign-on/index.html]
+* ``TODO``: [Everything that comes to mind while writing this manual]
 
 IdP management (in team settings or via curl)
 ---------------------------------------------
 
-TODO: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the curl way for everything?)
-TODO: Deletion is tricky, but solved: the rest api end-point fails if the idp to be deleted is still authenticating active users in the team; but if you move all those users to other IdPs, you can delete it.  
-TODO: There is also a `force` query parameter in the delete end-point that removes all dangling users instead of failing.  
-TODO: What's to be decided is how to add that to team settings. 
-TODO: Currently we need to fall back to the rest api for all this.
+* ``TODO``: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the curl way for everything?)
+* ``TODO``: Deletion is tricky, but solved: the rest api end-point fails if the idp to be deleted is still authenticating active users in the team; but if you move all those users to other IdPs, you can delete it.  
+* ``TODO``: There is also a `force` query parameter in the delete end-point that removes all dangling users instead of failing.  
+* ``TODO``: What's to be decided is how to add that to team settings. 
+* ``TODO``: Currently we need to fall back to the rest api for all this.
 
 
 Authentication
 --------------
 
-TODO: This could be kind of the user's manual.
-TODO: Or a summary of the user's manual plus a link, if we have it elsewhere. 
-TODO: (TODO: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
+* ``TODO``: This could be kind of the user's manual.
+* ``TODO``: Or a summary of the user's manual plus a link, if we have it elsewhere. 
+* ``TODO``: (``TODO``: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
 
 Setting up SSO externally
 -------------------------
 
-TODO: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
+``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
 
 Setting up SSO internally
 -------------------------
 
-TODO: Integrate https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
+``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
 
 
 SCIM user provisioning
@@ -107,7 +107,7 @@ SCIM user provisioning
 Terminology and concepts
 ------------------------
 
-TODO: - SCIM peer (equivalent to IdP)
+``TODO``: - SCIM peer (equivalent to IdP)
 
 SCIM peer management (in team settings or via curl)
 ---------------------------------------------------
@@ -115,8 +115,8 @@ SCIM peer management (in team settings or via curl)
 SCIM security and authentication
 ................................
 
-TODO: We're using a very basic variant of oauth that just contains a header with a bearer token in all SCIM requests. 
-TODO: The token is created in team settings and added to your scim peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
+* ``TODO``: We're using a very basic variant of oauth that just contains a header with a bearer token in all SCIM requests. 
+* ``TODO``: The token is created in team settings and added to your scim peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
 
 Generating a SCIM token 
 .......................
@@ -155,47 +155,49 @@ These are the steps to generate a new SCIM token, which you will need to provide
 
 Tokens are now listed in this SCIM area, you can generate up to 8.
 
-TODO: Add arrows/red lines to the images for even more precise instructions.
+``TODO``: Add arrows/red lines to the images for even more precise instructions.
 
 CRUD in team settings
 .....................
 
-TODO: Did we implement this fully? I think we may have:
-TODO: - We don't need the U in CRUD since we can just delete-and-recreate; and
-TODO: - We have just enough R for it to be secure (never expose the token after it's been handed over to the admin).
+``TODO``: Did we implement this fully? I think we may have:
+
+* ``TODO``: We don't need the U in CRUD since we can just delete-and-recreate; and
+* ``TODO``: We have just enough R for it to be secure (never expose the token after it's been handed over to the admin).
 
 Using SCIM with azure
 ---------------------
 
-TODO: We have a howto for SAML i think we'll need another one for SCIM.
+``TODO``: We have a howto for SAML i think we'll need another one for SCIM.
 
 Using SCIM via curl
 -------------------
 
-TODO: See `wireapp/wire-server/docs/reference/provisioning/` on github.
+``TODO``: See `wireapp/wire-server/docs/reference/provisioning/` on github.
 
 SCIM + SSO 
 ==========
 
-TODO: Using SAML SSO without SCIM is deprecated:
+``TODO``: Using SAML SSO without SCIM is deprecated:
 
-TODO: 1. SAML does not have a good update / deprovisioning story
-TODO: 2. Presenting users with attributes is not implemented in spar, because:
-TODO: 3. The SAML standard is very dated and has dubious security properties (TODO: dig up one of the many beautiful xml-dsig rants out there), should be considered legacy, and be used a little as possible.
+* ``TODO``: 1. SAML does not have a good update / deprovisioning story
+* ``TODO``: 2. Presenting users with attributes is not implemented in spar, because:
+* ``TODO``: 3. The SAML standard is very dated and has dubious security properties (``TODO``: dig up one of the many beautiful xml-dsig rants out there), should be considered legacy, and be used a little as possible.
 
-TODO: So the recommended setup is SAML + SCIM, and Oauth + SCIM as soon as we have released the latter.
+``TODO``: So the recommended setup is SAML + SCIM, and Oauth + SCIM as soon as we have released the latter.
 
 Corner cases
 ------------
 
-TODO: Why can't i disable SSO once it's enabled? -> need implementing.  
+``TODO``: Why can't i disable SSO once it's enabled? -> need implementing.  
 
-TODO: In order for this to work, we need to double-check that no sso users are still active in this team.
+``TODO``: In order for this to work, we need to double-check that no sso users are still active in this team.
 
-TODO: Hundreds and hundreds of corner cases:
-TODO: - You can't auto-provision users if scim tokens exist.
-TODO: - What happens if a user is created with sso auto-provisioning, then a scim token is created, and the user is now under scim management?  (*probably* all sound and good.)
-TODO: - What happens if the last scim token is removed, and users are still under scim management?  (possibly a bug.)
-TODO: - ...
+``TODO``: Hundreds and hundreds of corner cases:
 
-TODO: IDEA: This is the section that'll potentially be most valuable, but i think the way to proceed is to cover the general idea first, publish that, and then publish incremental progress on this advanced part of the manual as we make it.
+* ``TODO``: You can't auto-provision users if scim tokens exist.
+* ``TODO``: What happens if a user is created with sso auto-provisioning, then a scim token is created, and the user is now under scim management?  (*probably* all sound and good.)
+* ``TODO``: What happens if the last scim token is removed, and users are still under scim management?  (possibly a bug.)
+* ``TODO``: ...
+
+``TODO``: IDEA: This is the section that'll potentially be most valuable, but i think the way to proceed is to cover the general idea first, publish that, and then publish incremental progress on this advanced part of the manual as we make it.
