@@ -42,6 +42,10 @@ These concepts need to be understood to use the present manual:
     An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
     -- Wikipedia
 
+TODO: Define iDP (in relation to SCIM) 
+TODO: Define Curl
+TODO: Define SPAR 
+
 Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire. 
 
 You're looking at the administrator's manual.
@@ -51,8 +55,8 @@ You're looking at the administrator's manual.
     The reason is if you only use SSO, but do not configure/implement SCIM, you will experience reduced functionality.
     In particular, without SCIM all Wire users will be named according their e-mail address and won’t have any rich profiles.
 
-SSO From the user perspective 
-=============================
+User login for the first time with SSO
+======================================
 
 SSO allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
 No need to remember another password.
@@ -72,6 +76,7 @@ Here is what this looks from a user's perspective:
 * Click Log in.
 * Wire will load your company’s login page: Log in with your company credentials.
 
+TODO: Provide screenshots 
 
 SAML/SSO 
 ========
@@ -134,6 +139,8 @@ SCIM security and authentication
 Generating a SCIM token 
 .......................
 
+TODO: Notes from Lennart: In the current documentation I am missing the narrative. As a reader I would prefer a couple of sentences at the start explaining what the section is useful for. Example: it just says SCIM peer mgmt, but when does the reader need this, and for what? Example 2: it says you need to provide a SCIM token to your IdP for user provisioning. I would like a sentence or two about how the IdP uses the token and what info it conveys to the IdP, and what the token contains for info.
+
 These are the steps to generate a new SCIM token, which you will need to provide to your identity provider (IdP), along with the target API URL, to enable SCIM provisionning.
 
 * Step 1: Go to https://teams.wire.com/settings ( Here replace "wire.com" with your own domain if you have an on-premise installation of Wire ).
@@ -166,7 +173,7 @@ These are the steps to generate a new SCIM token, which you will need to provide
 .. image:: token-step-6.png
    :align: center
 
-Tokens are now listed in this SCIM area, you can generate up to 8.
+Tokens are now listed in this SCIM-related area of the screen, you can generate up to 8 such tokens.
 
 ``TODO``: Add arrows/red lines to the images for even more precise instructions.
 
