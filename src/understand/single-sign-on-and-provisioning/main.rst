@@ -1,6 +1,5 @@
 
 ``TODO``: Import or reference design.rst somehow.
-
 ``TODO``: Table of contents
 
 Introduction
@@ -8,13 +7,22 @@ Introduction
 
 This page is intended as a manual for administrator users in need of setting up SSO and provisionning users using SCIM on their installation of Wire.
 
-Historically, wire has allowed team admins and owners to manage their users in the team settings app.  This does not scale...
+TODO: Separate non-admin content into a different page for users only. Link to it here.
 
-Solution: SCIM! `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
+Historically and by default, Wire user auth is via phone or password. This has security implications and does not scale.
 
-Historically, wire user auth is via phone or password.  This has security implications: ...; and does not scale either: ...
+Solution: SSO with SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_ (future work: Oauth)
 
-Solution: SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_ (future work: Oauth)
+SSO systems allow users to identify on multiple systems (including Wire once configured as such) using a single ID and password.
+
+You can find some of the advantages of SSO over more traditional schemes `here <https://en.wikipedia.org/wiki/Single_sign-on>`_.
+
+Historically, wire has allowed team admins and owners to manage their users in the team settings app.  
+
+This does not scale as it requires a lot of manual labor for each user.
+
+The solution we offer to solve this issue is implementing SCIM `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
+
 
 Definitions
 ===========
