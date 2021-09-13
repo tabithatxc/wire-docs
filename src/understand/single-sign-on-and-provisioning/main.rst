@@ -57,6 +57,13 @@ TODO: Define iDP (in relation to SCIM)
 
    TODO: Context
 
+.. note::
+   Curl (pronounced "curl") is a command line tool used to download files over the HTTP (web) protocol. For example, ``curl http://wire.com`` will download the ``wire.com`` web page.
+   In this manual, it is used to contact API (Application Programming Interface) endpoints manually, where those endpoints would normally be accessed by code or other software. 
+   This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
+   For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
+   Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
+
 TODO: Define Curl
 TODO: Define SPAR 
 
