@@ -30,6 +30,7 @@ Definitions
 These concepts need to be understood to use the present manual:
 
 .. note::
+    SCIM:
     System for Cross-domain Identity Management (SCIM) is a standard for automating the exchange of user identity information between identity domains, or IT systems.
     One example might be that as a company onboards new employees and separates from existing employees, they are added and removed from the company's electronic employee directory. SCIM could be used to automatically add/delete (or, provision/de-provision) accounts for those users in external systems such as G Suite, Office 365, or Salesforce.com. Then, a new user account would exist in the external systems for each new employee, and the user accounts for former employees might no longer exist in those systems.   
     -- Wikipedia
@@ -37,6 +38,7 @@ These concepts need to be understood to use the present manual:
     TODO: Context
 
 .. note::
+    SAML:
     Security Assertion Markup Language (SAML, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. SAML is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). SAML is also:
     * A set of XML-based protocol messages
     * A set of protocol message bindings
@@ -48,7 +50,10 @@ These concepts need to be understood to use the present manual:
 
 TODO: Define iDP (in relation to SCIM) 
 
+TODO: Define SSO
+
 .. note::
+   iDp:
    An identity provider (abbreviated IdP or IDP) is a system entity that creates, maintains, and manages identity information for principals and also provides authentication services to relying applications within a federation or distributed network.[1][2]
    Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
    An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
@@ -58,14 +63,17 @@ TODO: Define iDP (in relation to SCIM)
    TODO: Context
 
 .. note::
+   Curl:
    Curl (pronounced "curl") is a command line tool used to download files over the HTTP (web) protocol. For example, ``curl http://wire.com`` will download the ``wire.com`` web page.
    In this manual, it is used to contact API (Application Programming Interface) endpoints manually, where those endpoints would normally be accessed by code or other software. 
    This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
    For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
    Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
 
-TODO: Define Curl
-TODO: Define SPAR 
+.. note::
+   SPAR:
+   The Wire backend software stack is composed of different services, running as pods in a kubernetes cluster. 
+   One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services.
 
 Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire. 
 
