@@ -71,9 +71,9 @@ TODO: Define SSO
    Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
 
 .. note::
-   SPAR:
-   The Wire backend software stack is composed of different services, running as pods in a kubernetes cluster. 
-   One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services.
+   Spar:
+   The Wire backend software stack is composed of different services, `running as pods</overview.html#focus-on-pods>`_ in a kubernetes cluster. 
+   One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services. This page is the manual for this service.
 
 Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire. 
 
@@ -117,7 +117,7 @@ Terminology and concepts
 * ``TODO``: Authentication request
 * ``TODO``: Authentication response
 * ``TODO``: How does the auth flow work (see ./design.rst)
-* ``TODO``: [Everything we discuss in https://docs.wire.com/how-to/single-sign-on/trouble-shooting.html, https://docs.wire.com/how-to/single-sign-on/index.html]
+* ``TODO``: [Everything we discuss in /how-to/single-sign-on/trouble-shooting.html, /how-to/single-sign-on/index.html]
 * ``TODO``: [Everything that comes to mind while writing this manual]
 
 IdP management (in team settings or via curl)
