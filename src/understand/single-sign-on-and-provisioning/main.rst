@@ -194,11 +194,15 @@ TODO: Screenshots.
 
 What to expect after SSO is enabled: 
 
-Anyone with a login through your SAML identity provider (IDP) and with access to the Wire app will be able to register and log in to your team using the SSO Login URL and/or Code. Take care to share the code only with members of your team.
+Anyone with a login through your SAML identity provider (IDP) and with access to the Wire app will be able to register and log in to your team using the SSO Login URL and/or Code. 
+
+Take care to share the code only with members of your team.
 
 When your team members create accounts on Wire using SSO, they will appear on the People tab of the team settings page.
 
-If team members already have Wire accounts, they will need to create new ones by registering with the SSO Login URL and/or Code. Existing Wire accounts cannot be bound to SSO logins.
+If team members already have Wire accounts, they will need to create new ones by registering with the SSO Login URL and/or Code. 
+
+Existing Wire accounts cannot be bound to SSO logins.
 
 .. note::
    This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
@@ -278,6 +282,29 @@ Using SCIM via curl
 -------------------
 
 ``TODO``: See `wireapp/wire-server/docs/reference/provisioning/` on github.
+
+You can use the ``curl`` command line HTTP tool to access tho wire backend (in particular the ``SPAR`` service) through the SCIM API. 
+
+This can be helpful both to perform single operations manually, and as a tool to learn about the SCIM API itself.
+
+Creating a SCIM token 
+.....................
+
+Before we can send commands to the SCIM API/Spar service, we need to be authenticated. This is done through the creation of a SCIM token.
+
+First, we need a little shell environment. Run the following in your terminal/shell::
+
+    export WIRE_BACKEND=https://prod-nginz-https.wire.com
+    export WIRE_ADMIN=...
+    export WIRE_PASSWD=...
+
+
+
+.. note::
+   To learn more, read the original Curl/SCMI documentation at: 
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-token.md
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-via-curl.md
+   If you want to dive into the backend code, start `reading here in our backend<https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/Scim.hs>`_ and `our hscim library<https://github.com/wireapp/hscim)>`_.
 
 SCIM + SSO 
 ==========
