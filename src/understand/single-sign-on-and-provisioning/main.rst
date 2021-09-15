@@ -141,6 +141,11 @@ TODO: Provide screenshots
 SAML/SSO
 ========
 
+Introduction
+------------
+
+TODO: Do SSO introduction
+
 Terminology and concepts
 ------------------------
 
@@ -323,6 +328,221 @@ First, we need a little shell environment. Run the following in your terminal/sh
     export WIRE_ADMIN=...
     export WIRE_PASSWD=...
 
+Wire's SCIM API currently supports a variant of HTTP basic auth.  
+
+In order to create a token in your team, you need to authenticate using your team admin credentials.  
+
+The way this works behind the scenes in your browser or cell phone, and in plain sight if you want to use curl, is you need to get a Wire token.
+
+First install the ``jq`` command (https://stedolan.github.io/jq/): 
+
+.. code-block:: bash
+
+    sudo apt install jq
+
+.. note:: 
+
+   If you don't want to install ``jq``, you can just call the ``curl`` command and copy the access token into the shell variable manually.
+
+Then run: 
+
+.. code-block:: bash
+    :linenos:
+
+    export BEARER=$(curl -X POST \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    -d '{"email":"'"$WIRE_ADMIN"'","password":"'"$WIRE_PASSWD"'"}' \
+    $WIRE_BACKEND/login'?persist=false' | jq -r .access_token)
+
+This token will be good for 15 minutes; after that, just repeat the command above to get a new token.
+
+.. note::
+    SCIM requests are authenticated with a SCIM token, see below. SCIM tokens and Wire tokens are different things. 
+    
+    A Wire token is necessary to get a SCIM token. SCIM tokens do not expire, but need to be deleted explicitly.
+
+You can test that you are logged in with the following command: 
+
+.. code-block:: bash
+
+    curl -X GET --header "Authorization: Bearer $BEARER" $WIRE_BACKEND/self
+
+Now you are ready to create a SCIM token:
+
+.. code-block:: bash
+    :linenos:
+
+    export SCIM_TOKEN_FULL=$(curl -X POST \
+    --header "Authorization: Bearer $BEARER" \
+    --header 'Content-Type: application/json;charset=utf-8' \
+    -d '{ "description": "test '"`date`"'", "password": "'"$WIRE_PASSWD"'" }' \
+    $WIRE_BACKEND/scim/auth-tokens)
+    export SCIM_TOKEN=$(echo $SCIM_TOKEN_FULL | jq -r .token)
+    export SCIM_TOKEN_ID=$(echo $SCIM_TOKEN_FULL | jq -r .info.id)
+
+The SCIM token is now contained in the ``SCIM_TOKEN`` environment variable.
+
+You can look it up again with: 
+
+.. code-block:: bash
+    :linenos:
+
+    curl -X GET --header "Authorization: Bearer $BEARER" \
+    $WIRE_BACKEND/scim/auth-tokens
+
+And you can delete it with:
+
+.. code-block:: bash
+    :linenos:
+
+    curl -X DELETE --header "Authorization: Bearer $BEARER" \
+    $WIRE_BACKEND/scim/auth-tokens?id=$SCIM_TOKEN_ID
+
+Using a SCIM token to Create Read Update and Delete (CRUD) users
+................................................................
+
+Now that you have your SCIM token, you can use it to talk to the SCIM API to manipulate (create, read, update, delete) users, either individually or in bulk.
+
+JSON encoding of SCIM Users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to manipulate users using commands, you need to specify user data.
+
+A minimal definition of a user is written in JSON format and looks like this:
+
+.. code-block:: json
+    :linenos:
+
+    {
+       "schemas"     : ["urn:ietf:params:scim:schemas:core:2.0:User"],
+       "externalId"  : "nick@example.com",
+       "userName"    : "nick",
+       "displayName" : "The Nick"
+    }
+
+You can store it in a variable using this sort of command:
+
+.. code-block:: bash
+    :linenos:
+
+    export SCIM_USER='{
+       "schemas"     : ["urn:ietf:params:scim:schemas:core:2.0:User"],
+       "externalId"  : "nick@example.com",
+       "userName"    : "nick",
+       "displayName" : "The Nick"
+    }'
+
+The ``externalId`` is used to construct a SAML identity.  Two cases are
+currently supported:
+
+1. ``externalId`` contains a valid email address.  
+   The SAML ``NameID`` has the form ``<NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">me@example.com</NameID>``.
+2. ``externalId`` contains anything that is *not* an email address.  
+   The SAML ``NameID`` has the form ``<NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">...</NameID>``.
+
+.. note::
+
+    It is important to configure your SAML provider to use ``nameid-format:emailAddress`` or ``nameid-format:unspecified``.  Other nameid formats are not supported at this moment.
+
+    See also: https://github.com/wireapp/wire-server/blob/c507ed64a7d4f0af2bffe2f9c3eb4b5f89a477c0/services/spar/src/Spar/Scim/User.hs#L149-L158
+
+We also support custom fields that are used in rich profiles in this form (see: https://github.com/wireapp/wire-server/blob/develop/docs/reference/user/rich-info.md):
+
+.. code-block:: bash
+   :linenos:
+
+    export SCIM_USER='{
+      "schemas"     : ["urn:ietf:params:scim:schemas:core:2.0:User", "urn:wire:scim:schemas:profile:1.0"],
+      "externalId"  : "rnick@example.com",
+      "userName"    : "rnick",
+      "displayName" : "The Rich Nick",
+      "urn:wire:scim:schemas:profile:1.0": {
+         "richInfo": [
+            {
+            "type": "Department",
+            "value": "Sales & Marketing"
+            },
+            {
+            "type": "Favorite color",
+            "value": "Blue"
+            }
+         ]
+      }
+    }'
+
+How to create a user
+~~~~~~~~~~~~~~~~~~~~
+
+You can create a user using the following command:
+
+.. code-block:: bash
+   :linenos:
+
+    export STORED_USER=$(curl -X POST \
+     --header "Authorization: Bearer $SCIM_TOKEN" \
+     --header 'Content-Type: application/json;charset=utf-8' \
+     -d "$SCIM_USER" \
+     $WIRE_BACKEND/scim/v2/Users)
+    export STORED_USER_ID=$(echo $STORED_USER | jq -r .id)
+
+Note that ``$SCIM_USER`` is in the JSON format and is declared before running this commend as described in the section above.
+   
+Get a specific user
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+   :linenos:
+
+    curl -X GET \
+      --header "Authorization: Bearer $SCIM_TOKEN" \
+      --header 'Content-Type: application/json;charset=utf-8' \
+      $WIRE_BACKEND/scim/v2/Users/$STORED_USER_ID
+
+Get all users
+~~~~~~~~~~~~~
+
+.. code-block:: bash
+   :linenos:
+
+    curl -X GET \
+      --header "Authorization: Bearer $SCIM_TOKEN" \
+      --header 'Content-Type: application/json;charset=utf-8' \
+    $WIRE_BACKEND/scim/v2/Users/
+
+Update a specific user
+~~~~~~~~~~~~~~~~~~~~~~
+
+For each put request, you need to provide the full json object.  All omitted fields will be set to ``null``.  (If you do not have an up-to-date user present, just ``GET`` one right before the ``PUT``.)
+
+.. code-block:: bash
+   :linenos:
+
+    export SCIM_USER='{
+      "schemas"     : ["urn:ietf:params:scim:schemas:core:2.0:User"],
+      "externalId"  : "rnick@example.com",
+      "userName"    : "newnick",
+      "displayName" : "The New Nick"
+    }'
+
+.. code-block:: bash
+   :linenos:
+
+    curl -X PUT \
+     --header "Authorization: Bearer $SCIM_TOKEN" \
+     --header 'Content-Type: application/json;charset=utf-8' \
+     -d "$SCIM_USER" \
+     $WIRE_BACKEND/scim/v2/Users/$STORED_USER_ID
+
+Delete user
+~~~~~~~~~~~
+
+.. code-block:: bash
+   :linenos:
+
+    curl -X DELETE \
+      --header "Authorization: Bearer $SCIM_TOKEN" \
+      $WIRE_BACKEND/scim/v2/Users/$STORED_USER_ID
 
 .. note::
    To learn more, read the original Curl/SCIM documentation at: 
