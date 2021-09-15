@@ -6,7 +6,7 @@
 Introduction
 ============
 
-This page is intended as a manual for administrator users in need of setting up SSO and provisionning users using SCIM on their installation of Wire.
+This page is intended as a manual for administrator users in need of setting up SSO and provisionning users using :term:`SCIM` on their installation of Wire.
 
 TODO: Separate non-admin content into a different page for users only. Link to it here.
 
@@ -22,11 +22,11 @@ Also historically, wire has allowed team admins and owners to manage their users
 
 This does not scale as it requires a lot of manual labor for each user.
 
-The solution we offer to solve this issue is implementing SCIM `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
+The solution we offer to solve this issue is implementing :term:`SCIM` `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
 
-SCIM is an interface that allows both software (for example Active Directory) and custom scripts to manage Identities (users) in "bulk".
+:term:`SCIM` is an interface that allows both software (for example Active Directory) and custom scripts to manage Identities (users) in "bulk".
 
-This page explains how to set up SCIM and then use it.
+This page explains how to set up :term:`SCIM` and then use it.
 
 
 Definitions
@@ -34,64 +34,86 @@ Definitions
 
 These concepts need to be understood to use the present manual:
 
-.. note::
-    SCIM:
-    System for Cross-domain Identity Management (SCIM) is a standard for automating the exchange of user identity information between identity domains, or IT systems.
-    One example might be that as a company onboards new employees and separates from existing employees, they are added and removed from the company's electronic employee directory. SCIM could be used to automatically add/delete (or, provision/de-provision) accounts for those users in external systems such as G Suite, Office 365, or Salesforce.com. Then, a new user account would exist in the external systems for each new employee, and the user accounts for former employees might no longer exist in those systems.   
-    -- Wikipedia
+TODO: Search-and-replace all terms from plain text to :term:`TERM`
 
-    TODO: Context
+.. glossary::
 
-.. note:: 
-    SSO: 
-    Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
-    True single sign-on allows the user to log in once and access services without re-entering authentication factors. 
-    -- `Single-Sign-On at Wikipedia <https://en.wikipedia.org/wiki/Single_sign-on>`_ 
+   SCIM
+       System for Cross-domain Identity Management (:term:`SCIM`) is a standard for automating the exchange of user identity information between identity domains, or IT systems.
 
-.. note::
-    SAML:
-    Security Assertion Markup Language (SAML, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. SAML is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). SAML is also:
-    * A set of XML-based protocol messages
-    * A set of protocol message bindings
-    * A set of profiles (utilizing all of the above)
-    An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
-    -- `SAML at Wikipedia <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
+       One example might be that as a company onboards new employees and separates from existing employees, they are added and removed from the company's electronic employee directory. :term:`SCIM` could be used to automatically add/delete (or, provision/de-provision) accounts for those users in external systems such as G Suite, Office 365, or Salesforce.com. Then, a new user account would exist in the external systems for each new employee, and the user accounts for former employees might no longer exist in those systems.   
+      
+       See: `System for Cross-domain Identity Management at Wikipedia <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ 
+      
+       TODO: Context
 
-    TODO: Context
+   SSO
+      
+       Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
+      
+       True single sign-on allows the user to log in once and access services without re-entering authentication factors. 
+      
+       See: `Single-Sign-On at Wikipedia <https://en.wikipedia.org/wiki/Single_sign-on>`_ 
 
-.. note::
-   iDp:
-   An identity provider (abbreviated IdP or IDP) is a system entity that creates, maintains, and manages identity information for principals and also provides authentication services to relying applications within a federation or distributed network.[1][2]
-   Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
-   An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
-   Identity providers can facilitate connections between cloud computing resources and users, thus decreasing the need for users to re-authenticate when using mobile and roaming applications.[4] 
-   -- `IdP at Wikipedia <https://en.wikipedia.org/wiki/Identity_provider>`_ 
+   SAML
 
-   TODO: Context (in relation to SCIM) 
+       Security Assertion Markup Language (SAML, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. SAML is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). SAML is also:
+    
+       * A set of XML-based protocol messages
+       * A set of protocol message bindings
+       * A set of profiles (utilizing all of the above)
+    
+       An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
+    
+       See: `SAML at Wikipedia <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
-.. note::
-   Curl:
-   Curl (pronounced "curl") is a command line tool used to download files over the HTTP (web) protocol. For example, ``curl http://wire.com`` will download the ``wire.com`` web page.
-   In this manual, it is used to contact API (Application Programming Interface) endpoints manually, where those endpoints would normally be accessed by code or other software. 
-   This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
-   For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
-   Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
-   -- `Curl at Wikipedia <https://en.wikipedia.org/wiki/CURL>`_
+       TODO: Context
 
-.. note::
-   Spar:
-   The Wire backend software stack is composed of different services, `running as pods </overview.html#focus-on-pods>`_ in a kubernetes cluster. 
-   One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services. This page is the manual for this service.
+   iDp
 
-Wire comes with a backend module that provides saml single sign on and scim user provisioning, called "Spar".
+       An identity provider (abbreviated IdP or IDP) is a system entity that creates, maintains, and manages identity information for principals and also provides authentication services to relying applications within a federation or distributed network.[1][2]
+   
+       Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
+   
+       An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
+   
+       Identity providers can facilitate connections between cloud computing resources and users, thus decreasing the need for users to re-authenticate when using mobile and roaming applications.[4] 
+   
+       See: `IdP at Wikipedia <https://en.wikipedia.org/wiki/Identity_provider>`_ 
+
+       TODO: Context (in relation to :term:`SCIM`) 
+
+
+   Curl
+
+       Curl (pronounced "curl") is a command line tool used to download files over the HTTP (web) protocol. For example, ``curl http://wire.com`` will download the ``wire.com`` web page.
+   
+       In this manual, it is used to contact API (Application Programming Interface) endpoints manually, where those endpoints would normally be accessed by code or other software. 
+   
+       This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
+   
+       For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
+   
+       Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
+   
+       -- `Curl at Wikipedia <https://en.wikipedia.org/wiki/CURL>`_
+
+
+   Spar
+
+       The Wire backend software stack is composed of different services, `running as pods </overview.html#focus-on-pods>`_ in a kubernetes cluster. 
+   
+       One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and :term:`SCIM` services. This page is the manual for this service.
+
+Wire comes with a backend module that provides saml single sign on and :term:`SCIM` user provisioning, called "Spar".
 
 You're looking at the administrator's manual for this module.
 
 .. note::
-    Note that it is recommended to use both SSO and SCIM (as opposed to just SSO alone). 
-    The reason is if you only use SSO, but do not configure/implement SCIM, you will experience reduced functionality.
-    In particular, without SCIM all Wire users will be named according their e-mail address and won’t have any rich profiles.
-    See below in the SCIM section for a more detailled explanation.
+    Note that it is recommended to use both SSO and :term:`SCIM` (as opposed to just SSO alone). 
+    The reason is if you only use SSO, but do not configure/implement :term:`SCIM`, you will experience reduced functionality.
+    In particular, without :term:`SCIM` all Wire users will be named according their e-mail address and won’t have any rich profiles.
+    See below in the :term:`SCIM` section for a more detailled explanation.
 
 User login for the first time with SSO
 ======================================
@@ -213,7 +235,7 @@ SCIM user provisioning
 Terminology and concepts
 ------------------------
 
-``TODO``: - SCIM peer (equivalent to IdP)
+``TODO``: - :term:`SCIM` peer (equivalent to IdP)
 
 SCIM peer management (in team settings or via curl)
 ---------------------------------------------------
@@ -221,15 +243,15 @@ SCIM peer management (in team settings or via curl)
 SCIM security and authentication
 ................................
 
-* ``TODO``: We're using a very basic variant of oauth that just contains a header with a bearer token in all SCIM requests. 
-* ``TODO``: The token is created in team settings and added to your scim peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
+* ``TODO``: We're using a very basic variant of oauth that just contains a header with a bearer token in all :term:`SCIM` requests. 
+* ``TODO``: The token is created in team settings and added to your :term:`SCIM` peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
 
 Generating a SCIM token 
 .......................
 
-TODO: Notes from Lennart: In the current documentation I am missing the narrative. As a reader I would prefer a couple of sentences at the start explaining what the section is useful for. Example: it just says SCIM peer mgmt, but when does the reader need this, and for what? Example 2: it says you need to provide a SCIM token to your IdP for user provisioning. I would like a sentence or two about how the IdP uses the token and what info it conveys to the IdP, and what the token contains for info.
+TODO: Notes from Lennart: In the current documentation I am missing the narrative. As a reader I would prefer a couple of sentences at the start explaining what the section is useful for. Example: it just says :term:`SCIM` peer mgmt, but when does the reader need this, and for what? Example 2: it says you need to provide a :term:`SCIM` token to your IdP for user provisioning. I would like a sentence or two about how the IdP uses the token and what info it conveys to the IdP, and what the token contains for info.
 
-These are the steps to generate a new SCIM token, which you will need to provide to your identity provider (IdP), along with the target API URL, to enable SCIM provisionning.
+These are the steps to generate a new :term:`SCIM` token, which you will need to provide to your identity provider (IdP), along with the target API URL, to enable :term:`SCIM` provisionning.
 
 * Step 1: Go to https://teams.wire.com/settings ( Here replace "wire.com" with your own domain if you have an on-premise installation of Wire ).
 
@@ -241,7 +263,7 @@ These are the steps to generate a new SCIM token, which you will need to provide
 .. image:: token-step-2.png
    :align: center
 
-* Step 3: Go to «Automated User Management (SCIM)»
+* Step 3: Go to «Automated User Management (:term:`SCIM`)»
 
 .. image:: token-step-3.png
    :align: center
@@ -261,7 +283,7 @@ These are the steps to generate a new SCIM token, which you will need to provide
 .. image:: token-step-6.png
    :align: center
 
-Tokens are now listed in this SCIM-related area of the screen, you can generate up to 8 such tokens.
+Tokens are now listed in this :term:`SCIM`-related area of the screen, you can generate up to 8 such tokens.
 
 ``TODO``: Add arrows/red lines to the images for even more precise instructions.
 
@@ -276,46 +298,48 @@ CRUD in team settings
 Using SCIM with azure
 ---------------------
 
-``TODO``: We have a howto for SAML i think we'll need another one for SCIM.
+``TODO``: We have a howto for SAML i think we'll need another one for :term:`SCIM`.
 
 Using SCIM via curl
 -------------------
 
 ``TODO``: See `wireapp/wire-server/docs/reference/provisioning/` on github.
 
-You can use the ``curl`` command line HTTP tool to access tho wire backend (in particular the ``SPAR`` service) through the SCIM API. 
+You can use the ``curl`` command line HTTP tool to access tho wire backend (in particular the ``SPAR`` service) through the :term:`SCIM` API. 
 
-This can be helpful both to perform single operations manually, and as a tool to learn about the SCIM API itself.
+This can be helpful both to perform single operations manually, and as a tool to learn about the :term:`SCIM` API itself.
 
 Creating a SCIM token 
 .....................
 
-Before we can send commands to the SCIM API/Spar service, we need to be authenticated. This is done through the creation of a SCIM token.
+Before we can send commands to the :term:`SCIM` API/Spar service, we need to be authenticated. This is done through the creation of a :term:`SCIM` token.
 
-First, we need a little shell environment. Run the following in your terminal/shell::
+First, we need a little shell environment. Run the following in your terminal/shell:
+
+.. code-block:: bash
+   :linenos:
 
     export WIRE_BACKEND=https://prod-nginz-https.wire.com
     export WIRE_ADMIN=...
     export WIRE_PASSWD=...
 
 
-
 .. note::
    To learn more, read the original Curl/SCMI documentation at: 
-   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-token.md
-   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-via-curl.md
-   If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/Scim.hs>`_ and `our hscim library <https://github.com/wireapp/hscim)>`_.
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-token.md
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-via-curl.md
+   If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/:term:`SCIM`.hs>`_ and `our h:term:`SCIM` library <https://github.com/wireapp/h:term:`SCIM`)>`_.
 
 SCIM + SSO 
 ==========
 
-``TODO``: Using SAML SSO without SCIM is deprecated:
+``TODO``: Using SAML SSO without :term:`SCIM` is deprecated:
 
 * ``TODO``: 1. SAML does not have a good update / deprovisioning story
 * ``TODO``: 2. Presenting users with attributes is not implemented in spar, because:
 * ``TODO``: 3. The SAML standard is very dated and has dubious security properties (``TODO``: dig up one of the many beautiful xml-dsig rants out there), should be considered legacy, and be used a little as possible.
 
-``TODO``: So the recommended setup is SAML + SCIM, and Oauth + SCIM as soon as we have released the latter.
+``TODO``: So the recommended setup is SAML + :term:`SCIM`, and Oauth + :term:`SCIM` as soon as we have released the latter.
 
 Corner cases
 ------------
@@ -326,9 +350,9 @@ Corner cases
 
 ``TODO``: Hundreds and hundreds of corner cases:
 
-* ``TODO``: You can't auto-provision users if scim tokens exist.
-* ``TODO``: What happens if a user is created with sso auto-provisioning, then a scim token is created, and the user is now under scim management?  (*probably* all sound and good.)
-* ``TODO``: What happens if the last scim token is removed, and users are still under scim management?  (possibly a bug.)
+* ``TODO``: You can't auto-provision users if :term:`SCIM` tokens exist.
+* ``TODO``: What happens if a user is created with sso auto-provisioning, then a :term:`SCIM` token is created, and the user is now under :term:`SCIM` management?  (*probably* all sound and good.)
+* ``TODO``: What happens if the last :term:`SCIM` token is removed, and users are still under :term:`SCIM` management?  (possibly a bug.)
 * ``TODO``: ...
 
 ``TODO``: IDEA: This is the section that'll potentially be most valuable, but i think the way to proceed is to cover the general idea first, publish that, and then publish incremental progress on this advanced part of the manual as we make it.
