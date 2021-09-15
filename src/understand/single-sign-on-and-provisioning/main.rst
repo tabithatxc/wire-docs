@@ -1,7 +1,8 @@
 
 ``TODO``: Import or reference design.rst somehow.
-``TODO``: Table of contents
 
+.. contents::
+ 
 Introduction
 ============
 
