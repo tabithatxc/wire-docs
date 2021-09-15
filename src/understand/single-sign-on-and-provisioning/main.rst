@@ -10,19 +10,23 @@ This page is intended as a manual for administrator users in need of setting up 
 
 TODO: Separate non-admin content into a different page for users only. Link to it here.
 
-Historically and by default, Wire user auth is via phone or password. This has security implications and does not scale.
+Historically and by default, Wire's user authentication method is via phone or password. This has security implications and does not scale.
 
-Solution: SSO with SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_ (future work: Oauth)
+Solution: SSO with SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
 SSO systems allow users to identify on multiple systems (including Wire once configured as such) using a single ID and password.
 
 You can find some of the advantages of SSO over more traditional schemes `here <https://en.wikipedia.org/wiki/Single_sign-on>`_.
 
-Historically, wire has allowed team admins and owners to manage their users in the team settings app.  
+Also historically, wire has allowed team admins and owners to manage their users in the team settings app.  
 
 This does not scale as it requires a lot of manual labor for each user.
 
 The solution we offer to solve this issue is implementing SCIM `(System for Cross-domain Identity Management) <https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management>`_ (what's this?)
+
+SCIM is an interface that allows both software (for example Active Directory) and custom scripts to manage Identities (users) in "bulk".
+
+This page explains how to set up SCIM and then use it.
 
 
 Definitions
@@ -38,6 +42,12 @@ These concepts need to be understood to use the present manual:
 
     TODO: Context
 
+.. note:: 
+    SSO: 
+    Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
+    True single sign-on allows the user to log in once and access services without re-entering authentication factors. 
+      -- `Wikipedia<https://en.wikipedia.org/wiki/Single_sign-on>`_ 
+
 .. note::
     SAML:
     Security Assertion Markup Language (SAML, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. SAML is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). SAML is also:
@@ -45,13 +55,9 @@ These concepts need to be understood to use the present manual:
     * A set of protocol message bindings
     * A set of profiles (utilizing all of the above)
     An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
-    -- Wikipedia
+      -- `Wikipedia<https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
     TODO: Context
-
-TODO: Define iDP (in relation to SCIM) 
-
-TODO: Define SSO
 
 .. note::
    iDp:
@@ -59,9 +65,9 @@ TODO: Define SSO
    Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
    An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
    Identity providers can facilitate connections between cloud computing resources and users, thus decreasing the need for users to re-authenticate when using mobile and roaming applications.[4] 
-   -- Wikipedia
+     -- `Wikipedia<https://en.wikipedia.org/wiki/Identity_provider>`_ 
 
-   TODO: Context
+   TODO: Context (in relation to SCIM) 
 
 .. note::
    Curl:
@@ -70,6 +76,7 @@ TODO: Define SSO
    This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
    For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
    Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
+     -- `Wikipedia<https://en.wikipedia.org/wiki/CURL>`_
 
 .. note::
    Spar:
