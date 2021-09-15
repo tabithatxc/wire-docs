@@ -6,17 +6,17 @@
 Introduction
 ============
 
-This page is intended as a manual for administrator users in need of setting up SSO and provisionning users using :term:`SCIM` on their installation of Wire.
+This page is intended as a manual for administrator users in need of setting up :term:`SSO` and provisionning users using :term:`SCIM` on their installation of Wire.
 
 TODO: Separate non-admin content into a different page for users only. Link to it here.
 
 Historically and by default, Wire's user authentication method is via phone or password. This has security implications and does not scale.
 
-Solution: SSO with SAML! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
+Solution: :term:`SSO` with :term:`SAML`! `(Security Assertion Markup Language) <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
-SSO systems allow users to identify on multiple systems (including Wire once configured as such) using a single ID and password.
+:term:`SSO` systems allow users to identify on multiple systems (including Wire once configured as such) using a single ID and password.
 
-You can find some of the advantages of SSO over more traditional schemes `here <https://en.wikipedia.org/wiki/Single_sign-on>`_.
+You can find some of the advantages of :term:`SSO` over more traditional schemes `here <https://en.wikipedia.org/wiki/Single_sign-on>`_.
 
 Also historically, wire has allowed team admins and owners to manage their users in the team settings app.  
 
@@ -49,7 +49,7 @@ TODO: Search-and-replace all terms from plain text to :term:`TERM`
 
    SSO
       
-       Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
+       Single sign-on (:term:`SSO`) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
       
        True single sign-on allows the user to log in once and access services without re-entering authentication factors. 
       
@@ -57,68 +57,68 @@ TODO: Search-and-replace all terms from plain text to :term:`TERM`
 
    SAML
 
-       Security Assertion Markup Language (SAML, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. SAML is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). SAML is also:
+       Security Assertion Markup Language (:term:`SAML`, pronounced SAM-el, /ˈsæməl/) is an open standard for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider. :term:`SAML` is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). :term:`SAML` is also:
     
        * A set of XML-based protocol messages
        * A set of protocol message bindings
        * A set of profiles (utilizing all of the above)
     
-       An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
+       An important use case that :term:`SAML` addresses is web-browser `single sign-on (:term:`SSO`) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending :term:`SSO` across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The :term:`SAML` Web Browser `:term:`SSO` <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
     
-       See: `SAML at Wikipedia <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
+       See: `:term:`SAML` at Wikipedia <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
        TODO: Context
 
-   iDp
+   IdP
 
-       An identity provider (abbreviated IdP or IDP) is a system entity that creates, maintains, and manages identity information for principals and also provides authentication services to relying applications within a federation or distributed network.[1][2]
+       An identity provider (abbreviated :term:`IdP` or :term:`IdP`) is a system entity that creates, maintains, and manages identity information for principals and also provides authentication services to relying applications within a federation or distributed network.[1][2]
    
        Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
    
-       An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
+       An identity provider is “a trusted provider that lets you use single sign-on (:term:`SSO`) to access other websites.”[3] :term:`SSO` enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
    
        Identity providers can facilitate connections between cloud computing resources and users, thus decreasing the need for users to re-authenticate when using mobile and roaming applications.[4] 
    
-       See: `IdP at Wikipedia <https://en.wikipedia.org/wiki/Identity_provider>`_ 
+       See: `:term:`IdP` at Wikipedia <https://en.wikipedia.org/wiki/Identity_provider>`_ 
 
        TODO: Context (in relation to :term:`SCIM`) 
 
 
    Curl
 
-       Curl (pronounced "curl") is a command line tool used to download files over the HTTP (web) protocol. For example, ``curl http://wire.com`` will download the ``wire.com`` web page.
+       :term:`Curl` (pronounced ":term:`Curl`") is a command line tool used to download files over the HTTP (web) protocol. For example, ``:term:`Curl` http://wire.com`` will download the ``wire.com`` web page.
    
        In this manual, it is used to contact API (Application Programming Interface) endpoints manually, where those endpoints would normally be accessed by code or other software. 
    
        This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
    
-       For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
+       For example (not a real endpoint) ``:term:`Curl` http://api.wire.com/delete_user/thomas`` would (schematically) execute the :term:`Curl` command, which would contact the wire.com API and delete the user named "thomas". 
    
-       Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
+       Running this command in a terminal would cause the ``:term:`Curl``` command to access this URL, and the API at that URL would execute the requested action.
    
-       -- `Curl at Wikipedia <https://en.wikipedia.org/wiki/CURL>`_
+       -- `:term:`Curl` at Wikipedia <https://en.wikipedia.org/wiki/:term:`Curl`>`_
 
 
    Spar
 
        The Wire backend software stack is composed of different services, `running as pods </overview.html#focus-on-pods>`_ in a kubernetes cluster. 
    
-       One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and :term:`SCIM` services. This page is the manual for this service.
+       One of those pods is the "SPAR" service. That service/pod is dedicated to the providing :term:`SSO` and :term:`SCIM` services. This page is the manual for this service.
 
-Wire comes with a backend module that provides saml single sign on and :term:`SCIM` user provisioning, called "Spar".
+Wire comes with a backend module that provides :term:`SAML` single sign on and :term:`SCIM` user provisioning, called "Spar".
 
 You're looking at the administrator's manual for this module.
 
 .. note::
-    Note that it is recommended to use both SSO and :term:`SCIM` (as opposed to just SSO alone). 
-    The reason is if you only use SSO, but do not configure/implement :term:`SCIM`, you will experience reduced functionality.
+    Note that it is recommended to use both :term:`SSO` and :term:`SCIM` (as opposed to just :term:`SSO` alone). 
+    The reason is if you only use :term:`SSO`, but do not configure/implement :term:`SCIM`, you will experience reduced functionality.
     In particular, without :term:`SCIM` all Wire users will be named according their e-mail address and won’t have any rich profiles.
     See below in the :term:`SCIM` section for a more detailled explanation.
 
-User login for the first time with SSO
+User login for the first time with :term:`SSO`
 ======================================
 
-SSO allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
+:term:`SSO` allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
 No need to remember another password.
 
 When a team is set up on Wire, the administrators can provide users a login code or link that they can use to go straight to their company’s login page.
@@ -138,7 +138,7 @@ Here is what this looks from a user's perspective:
 
 TODO: Provide screenshots 
 
-SAML/SSO 
+:term:`SAML`/:term:`SSO` 
 ========
 
 Terminology and concepts
@@ -150,11 +150,11 @@ Terminology and concepts
 * ``TODO``: [Everything we discuss in /how-to/single-sign-on/trouble-shooting.html, /how-to/single-sign-on/index.html]
 * ``TODO``: [Everything that comes to mind while writing this manual]
 
-IdP management (in team settings or via curl)
+:term:`IdP` management (in team settings or via :term:`Curl`)
 ---------------------------------------------
 
-* ``TODO``: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the curl way for everything?)
-* ``TODO``: Deletion is tricky, but solved: the rest api end-point fails if the idp to be deleted is still authenticating active users in the team; but if you move all those users to other IdPs, you can delete it.  
+* ``TODO``: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the :term:`Curl` way for everything?)
+* ``TODO``: Deletion is tricky, but solved: the rest api end-point fails if the :term:`IdP` to be deleted is still authenticating active users in the team; but if you move all those users to other :term:`IdP`s, you can delete it.  
 * ``TODO``: There is also a `force` query parameter in the delete end-point that removes all dangling users instead of failing.  
 * ``TODO``: What's to be decided is how to add that to team settings. 
 * ``TODO``: Currently we need to fall back to the rest api for all this.
@@ -167,12 +167,12 @@ Authentication
 * ``TODO``: Or a summary of the user's manual plus a link, if we have it elsewhere. 
 * ``TODO``: (``TODO``: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
 
-Setting up SSO externally
+Setting up :term:`SSO` externally
 -------------------------
 
-``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
+``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-:term:`SSO`-externally
 
-To set up SSO for a given Wire installation, the Team owner/administrator must enable it.
+To set up :term:`SSO` for a given Wire installation, the Team owner/administrator must enable it.
 
 The first step is to configure the Identity Provider: you'll need to register Wire as a service provider in your Identity Provider.
 
@@ -185,49 +185,49 @@ We've put together guides for registering with different providers:
 * Generic instructions (try this if none of the above are applicable) <../../how-to/single-sign-on/generic-setup.rst>
 * Trouble shooting & FAQ <../../how-to/single-sign-on/trouble-shooting.rst>
 
-As you do this, make sure you take note of your IDP metadata, which you will need for the next step.
+As you do this, make sure you take note of your :term:`IdP` metadata, which you will need for the next step.
 
-TODO: Make sure each step explains about the IdP metadata so this isn't confusing when getting here.
+TODO: Make sure each step explains about the :term:`IdP` metadata so this isn't confusing when getting here.
 
-Once you are finished with registering Wire to your IdP, move on to the next step, setting up SSO internally.
+Once you are finished with registering Wire to your :term:`IdP`, move on to the next step, setting up :term:`SSO` internally.
 
 TODO: This page is located in understand/, but it's really more of a how-to/ right? 
 
-Setting up SSO internally
+Setting up :term:`SSO` internally
 -------------------------
 
-Now that you’ve registered Wire with your identity provider (IDP), you can enable SSO for your team on Wire.
+Now that you’ve registered Wire with your identity provider (:term:`IdP`), you can enable :term:`SSO` for your team on Wire.
 
 On Desktop:
 
 * Click Settings.
 * Click Manage Team or go directly to teams.wire.com, or if you have an on-premise install, go to teams.<your-domain>.com
 * Login with your account credentials.
-* Click Customization. Here you will see the section for SSO.
+* Click Customization. Here you will see the section for :term:`SSO`.
 * Click the blue down arrow.
-* Click Add SAML Connection.
-* Provide the IDP metadata. To find out more about retrieving this for your provider, see the guides in the "Setting up SSO externally" step just above.
+* Click Add :term:`SAML` Connection.
+* Provide the :term:`IdP` metadata. To find out more about retrieving this for your provider, see the guides in the "Setting up :term:`SSO` externally" step just above.
 * Click Save.
-* Wire will now validate the document to set up the SAML connection.
+* Wire will now validate the document to set up the :term:`SAML` connection.
 * If the data is valid, you will return to the Settings page.
-* The page shows the information you need to log in with SSO. Copy the login code or URL and send it to your team members or partners. For more information see: Logging in with SSO.
+* The page shows the information you need to log in with :term:`SSO`. Copy the login code or URL and send it to your team members or partners. For more information see: Logging in with :term:`SSO`.
 
 TODO: Screenshots.
 
-What to expect after SSO is enabled: 
+What to expect after :term:`SSO` is enabled: 
 
-Anyone with a login through your SAML identity provider (IDP) and with access to the Wire app will be able to register and log in to your team using the SSO Login URL and/or Code. 
+Anyone with a login through your :term:`SAML` identity provider (:term:`IdP`) and with access to the Wire app will be able to register and log in to your team using the :term:`SSO` Login URL and/or Code. 
 
 Take care to share the code only with members of your team.
 
-When your team members create accounts on Wire using SSO, they will appear on the People tab of the team settings page.
+When your team members create accounts on Wire using :term:`SSO`, they will appear on the People tab of the team settings page.
 
-If team members already have Wire accounts, they will need to create new ones by registering with the SSO Login URL and/or Code. 
+If team members already have Wire accounts, they will need to create new ones by registering with the :term:`SSO` Login URL and/or Code. 
 
-Existing Wire accounts cannot be bound to SSO logins.
+Existing Wire accounts cannot be bound to :term:`SSO` logins.
 
 .. note::
-   This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
+   This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-:term:`SSO`-internally
 
 SCIM user provisioning
 ======================
@@ -235,23 +235,23 @@ SCIM user provisioning
 Terminology and concepts
 ------------------------
 
-``TODO``: - :term:`SCIM` peer (equivalent to IdP)
+``TODO``: - :term:`SCIM` peer (equivalent to :term:`IdP`)
 
-SCIM peer management (in team settings or via curl)
+SCIM peer management (in team settings or via :term:`Curl`)
 ---------------------------------------------------
 
 SCIM security and authentication
 ................................
 
 * ``TODO``: We're using a very basic variant of oauth that just contains a header with a bearer token in all :term:`SCIM` requests. 
-* ``TODO``: The token is created in team settings and added to your :term:`SCIM` peer somehow (see howtos or below (wherever we end up putting it) for Azure, curl).
+* ``TODO``: The token is created in team settings and added to your :term:`SCIM` peer somehow (see howtos or below (wherever we end up putting it) for Azure, :term:`Curl`).
 
 Generating a SCIM token 
 .......................
 
-TODO: Notes from Lennart: In the current documentation I am missing the narrative. As a reader I would prefer a couple of sentences at the start explaining what the section is useful for. Example: it just says :term:`SCIM` peer mgmt, but when does the reader need this, and for what? Example 2: it says you need to provide a :term:`SCIM` token to your IdP for user provisioning. I would like a sentence or two about how the IdP uses the token and what info it conveys to the IdP, and what the token contains for info.
+TODO: Notes from Lennart: In the current documentation I am missing the narrative. As a reader I would prefer a couple of sentences at the start explaining what the section is useful for. Example: it just says :term:`SCIM` peer mgmt, but when does the reader need this, and for what? Example 2: it says you need to provide a :term:`SCIM` token to your :term:`IdP` for user provisioning. I would like a sentence or two about how the :term:`IdP` uses the token and what info it conveys to the :term:`IdP`, and what the token contains for info.
 
-These are the steps to generate a new :term:`SCIM` token, which you will need to provide to your identity provider (IdP), along with the target API URL, to enable :term:`SCIM` provisionning.
+These are the steps to generate a new :term:`SCIM` token, which you will need to provide to your identity provider (:term:`IdP`), along with the target API URL, to enable :term:`SCIM` provisionning.
 
 * Step 1: Go to https://teams.wire.com/settings ( Here replace "wire.com" with your own domain if you have an on-premise installation of Wire ).
 
@@ -298,14 +298,14 @@ CRUD in team settings
 Using SCIM with azure
 ---------------------
 
-``TODO``: We have a howto for SAML i think we'll need another one for :term:`SCIM`.
+``TODO``: We have a howto for :term:`SAML` i think we'll need another one for :term:`SCIM`.
 
-Using SCIM via curl
+Using SCIM via :term:`Curl`
 -------------------
 
 ``TODO``: See `wireapp/wire-server/docs/reference/provisioning/` on github.
 
-You can use the ``curl`` command line HTTP tool to access tho wire backend (in particular the ``SPAR`` service) through the :term:`SCIM` API. 
+You can use the ``:term:`Curl``` command line HTTP tool to access tho wire backend (in particular the ``SPAR`` service) through the :term:`SCIM` API. 
 
 This can be helpful both to perform single operations manually, and as a tool to learn about the :term:`SCIM` API itself.
 
@@ -325,33 +325,33 @@ First, we need a little shell environment. Run the following in your terminal/sh
 
 
 .. note::
-   To learn more, read the original Curl/SCMI documentation at: 
+   To learn more, read the original :term:`Curl`/SCMI documentation at: 
    * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-token.md
-   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-via-curl.md
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-via-:term:`Curl`.md
    If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/:term:`SCIM`.hs>`_ and `our h:term:`SCIM` library <https://github.com/wireapp/h:term:`SCIM`)>`_.
 
-SCIM + SSO 
+SCIM + :term:`SSO` 
 ==========
 
-``TODO``: Using SAML SSO without :term:`SCIM` is deprecated:
+``TODO``: Using :term:`SAML` :term:`SSO` without :term:`SCIM` is deprecated:
 
-* ``TODO``: 1. SAML does not have a good update / deprovisioning story
+* ``TODO``: 1. :term:`SAML` does not have a good update / deprovisioning story
 * ``TODO``: 2. Presenting users with attributes is not implemented in spar, because:
-* ``TODO``: 3. The SAML standard is very dated and has dubious security properties (``TODO``: dig up one of the many beautiful xml-dsig rants out there), should be considered legacy, and be used a little as possible.
+* ``TODO``: 3. The :term:`SAML` standard is very dated and has dubious security properties (``TODO``: dig up one of the many beautiful xml-dsig rants out there), should be considered legacy, and be used a little as possible.
 
-``TODO``: So the recommended setup is SAML + :term:`SCIM`, and Oauth + :term:`SCIM` as soon as we have released the latter.
+``TODO``: So the recommended setup is :term:`SAML` + :term:`SCIM`, and Oauth + :term:`SCIM` as soon as we have released the latter.
 
 Corner cases
 ------------
 
-``TODO``: Why can't i disable SSO once it's enabled? -> need implementing.  
+``TODO``: Why can't i disable :term:`SSO` once it's enabled? -> need implementing.  
 
-``TODO``: In order for this to work, we need to double-check that no sso users are still active in this team.
+``TODO``: In order for this to work, we need to double-check that no :term:`SSO` users are still active in this team.
 
 ``TODO``: Hundreds and hundreds of corner cases:
 
 * ``TODO``: You can't auto-provision users if :term:`SCIM` tokens exist.
-* ``TODO``: What happens if a user is created with sso auto-provisioning, then a :term:`SCIM` token is created, and the user is now under :term:`SCIM` management?  (*probably* all sound and good.)
+* ``TODO``: What happens if a user is created with :term:`SSO` auto-provisioning, then a :term:`SCIM` token is created, and the user is now under :term:`SCIM` management?  (*probably* all sound and good.)
 * ``TODO``: What happens if the last :term:`SCIM` token is removed, and users are still under :term:`SCIM` management?  (possibly a bug.)
 * ``TODO``: ...
 
