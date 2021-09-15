@@ -115,7 +115,7 @@ You're looking at the administrator's manual for this module.
     In particular, without :term:`SCIM` all Wire users will be named according their e-mail address and won’t have any rich profiles.
     See below in the :term:`SCIM` section for a more detailled explanation.
 
-User login for the first time with :term:`SSO`
+User login for the first time with SSO
 ======================================
 
 :term:`SSO` allows users to register and log into Wire with their company credentials that they use on other software in their workplace. 
@@ -138,7 +138,7 @@ Here is what this looks from a user's perspective:
 
 TODO: Provide screenshots 
 
-:term:`SAML`/:term:`SSO` 
+SAML/SSO
 ========
 
 Terminology and concepts
@@ -150,7 +150,7 @@ Terminology and concepts
 * ``TODO``: [Everything we discuss in /how-to/single-sign-on/trouble-shooting.html, /how-to/single-sign-on/index.html]
 * ``TODO``: [Everything that comes to mind while writing this manual]
 
-:term:`IdP` management (in team settings or via :term:`Curl`)
+IdP management (in team settings or via Curl)
 ---------------------------------------------
 
 * ``TODO``: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the :term:`Curl` way for everything?)
@@ -167,7 +167,7 @@ Authentication
 * ``TODO``: Or a summary of the user's manual plus a link, if we have it elsewhere. 
 * ``TODO``: (``TODO``: talk to srikant and maybe astrid about the new documentation that's to replace support.wire.com, i heard rumors about that).
 
-Setting up :term:`SSO` externally
+Setting up SSO externally
 -------------------------
 
 ``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-:term:`SSO`-externally
@@ -193,7 +193,7 @@ Once you are finished with registering Wire to your :term:`IdP`, move on to the 
 
 TODO: This page is located in understand/, but it's really more of a how-to/ right? 
 
-Setting up :term:`SSO` internally
+Setting up SSO internally
 -------------------------
 
 Now that you’ve registered Wire with your identity provider (:term:`IdP`), you can enable :term:`SSO` for your team on Wire.
@@ -237,7 +237,7 @@ Terminology and concepts
 
 ``TODO``: - :term:`SCIM` peer (equivalent to :term:`IdP`)
 
-SCIM peer management (in team settings or via :term:`Curl`)
+SCIM peer management (in team settings or via Curl)
 ---------------------------------------------------
 
 SCIM security and authentication
@@ -300,7 +300,7 @@ Using SCIM with azure
 
 ``TODO``: We have a howto for :term:`SAML` i think we'll need another one for :term:`SCIM`.
 
-Using SCIM via :term:`Curl`
+Using SCIM via Curl
 -------------------
 
 ``TODO``: See `wireapp/wire-server/docs/reference/provisioning/` on github.
@@ -330,7 +330,7 @@ First, we need a little shell environment. Run the following in your terminal/sh
    * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-via-:term:`Curl`.md
    If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/:term:`SCIM`.hs>`_ and `our h:term:`SCIM` library <https://github.com/wireapp/h:term:`SCIM`)>`_.
 
-SCIM + :term:`SSO` 
+SCIM + SSO
 ==========
 
 ``TODO``: Using :term:`SAML` :term:`SSO` without :term:`SCIM` is deprecated:
