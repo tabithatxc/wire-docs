@@ -46,7 +46,7 @@ These concepts need to be understood to use the present manual:
     SSO: 
     Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems. 
     True single sign-on allows the user to log in once and access services without re-entering authentication factors. 
-      -- `Wikipedia<https://en.wikipedia.org/wiki/Single_sign-on>`_ 
+    -- `Single-Sign-On at Wikipedia <https://en.wikipedia.org/wiki/Single_sign-on>`_ 
 
 .. note::
     SAML:
@@ -55,7 +55,7 @@ These concepts need to be understood to use the present manual:
     * A set of protocol message bindings
     * A set of profiles (utilizing all of the above)
     An important use case that SAML addresses is web-browser `single sign-on (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`_ . Single sign-on is relatively easy to accomplish within a security domain (using cookies, for example) but extending SSO across security domains is more difficult and resulted in the proliferation of non-interoperable proprietary technologies. The SAML Web Browser `SSO <https://en.wikipedia.org/wiki/Single_sign-on>`_ profile was specified and standardized to promote interoperability.
-      -- `Wikipedia<https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
+    -- `SAML at Wikipedia <https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language>`_
 
     TODO: Context
 
@@ -65,7 +65,7 @@ These concepts need to be understood to use the present manual:
    Identity providers offer user authentication as a service. Relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider. Such a relying party application is said to be federated, that is, it consumes federated identity.
    An identity provider is “a trusted provider that lets you use single sign-on (SSO) to access other websites.”[3] SSO enhances usability by reducing password fatigue. It also provides better security by decreasing the potential attack surface.
    Identity providers can facilitate connections between cloud computing resources and users, thus decreasing the need for users to re-authenticate when using mobile and roaming applications.[4] 
-     -- `Wikipedia<https://en.wikipedia.org/wiki/Identity_provider>`_ 
+   -- `IdP at Wikipedia <https://en.wikipedia.org/wiki/Identity_provider>`_ 
 
    TODO: Context (in relation to SCIM) 
 
@@ -76,11 +76,11 @@ These concepts need to be understood to use the present manual:
    This can be used either for illustrative purposes (to "show" how the endpoints can be used) or to allow the manual execution of some simple tasks.
    For example (not a real endpoint) ``curl http://api.wire.com/delete_user/thomas`` would (schematically) execute the curl command, which would contact the wire.com API and delete the user named "thomas". 
    Running this command in a terminal would cause the ``curl`` command to access this URL, and the API at that URL would execute the requested action.
-     -- `Wikipedia<https://en.wikipedia.org/wiki/CURL>`_
+   -- `Curl at Wikipedia <https://en.wikipedia.org/wiki/CURL>`_
 
 .. note::
    Spar:
-   The Wire backend software stack is composed of different services, `running as pods</overview.html#focus-on-pods>`_ in a kubernetes cluster. 
+   The Wire backend software stack is composed of different services, `running as pods </overview.html#focus-on-pods>`_ in a kubernetes cluster. 
    One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services. This page is the manual for this service.
 
 Wire comes with a backend module that provides saml single sign on and scim user provisioning, called "Spar".
@@ -304,7 +304,7 @@ First, we need a little shell environment. Run the following in your terminal/sh
    To learn more, read the original Curl/SCMI documentation at: 
    * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-token.md
    * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/scim-via-curl.md
-   If you want to dive into the backend code, start `reading here in our backend<https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/Scim.hs>`_ and `our hscim library<https://github.com/wireapp/hscim)>`_.
+   If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/Scim.hs>`_ and `our hscim library <https://github.com/wireapp/hscim)>`_.
 
 SCIM + SSO 
 ==========
