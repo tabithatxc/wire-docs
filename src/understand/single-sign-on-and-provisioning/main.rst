@@ -83,14 +83,15 @@ These concepts need to be understood to use the present manual:
    The Wire backend software stack is composed of different services, `running as pods</overview.html#focus-on-pods>`_ in a kubernetes cluster. 
    One of those pods is the "SPAR" service. That service/pod is dedicated to the providing SSO and SCIM services. This page is the manual for this service.
 
-Wire comes with a backend module that provides saml single sign on and scim user provisioning for wire. 
+Wire comes with a backend module that provides saml single sign on and scim user provisioning, called "Spar".
 
-You're looking at the administrator's manual.
+You're looking at the administrator's manual for this module.
 
 .. note::
     Note that it is recommended to use both SSO and SCIM (as opposed to just SSO alone). 
     The reason is if you only use SSO, but do not configure/implement SCIM, you will experience reduced functionality.
     In particular, without SCIM all Wire users will be named according their e-mail address and won’t have any rich profiles.
+    See below in the SCIM section for a more detailled explanation.
 
 User login for the first time with SSO
 ======================================
@@ -121,7 +122,6 @@ SAML/SSO
 Terminology and concepts
 ------------------------
 
-* ``TODO``: IdP (https://en.wikipedia.org/wiki/Identity_provider)
 * ``TODO``: Authentication request
 * ``TODO``: Authentication response
 * ``TODO``: How does the auth flow work (see ./design.rst)
@@ -150,11 +150,58 @@ Setting up SSO externally
 
 ``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
 
+To set up SSO for a given Wire installation, the Team owner/administrator must enable it.
+
+The first step is to configure the Identity Provider: you'll need to register Wire as a service provider in your Identity Provider.
+
+We've put together guides for registering with different providers:
+
+* Instructions for Okta <../../how-to/single-sign-on/okta/main.rst>
+* Instructions for Centrify <../../how-to/single-sign-on/centrify/main.rst>
+* Instructions for Azure <../../how-to/single-sign-on/azure/main.rst>
+* Some screenshots for ADFS <../../how-to/single-sign-on/adfs/main.rst>
+* Generic instructions (try this if none of the above are applicable) <../../how-to/single-sign-on/generic-setup.rst>
+* Trouble shooting & FAQ <../../how-to/single-sign-on/trouble-shooting.rst>
+
+As you do this, make sure you take note of your IDP metadata, which you will need for the next step.
+
+TODO: Make sure each step explains about the IdP metadata so this isn't confusing when getting here.
+
+Once you are finished with registering Wire to your IdP, move on to the next step, setting up SSO internally.
+
+TODO: This page is located in understand/, but it's really more of a how-to/ right? 
+
 Setting up SSO internally
 -------------------------
 
-``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
+Now that you’ve registered Wire with your identity provider (IDP), you can enable SSO for your team on Wire.
 
+On Desktop:
+
+* Click Settings.
+* Click Manage Team or go directly to teams.wire.com, or if you have an on-premise install, go to teams.<your-domain>.com
+* Login with your account credentials.
+* Click Customization. Here you will see the section for SSO.
+* Click the blue down arrow.
+* Click Add SAML Connection.
+* Provide the IDP metadata. To find out more about retrieving this for your provider, see the guides in the "Setting up SSO externally" step just above.
+* Click Save.
+* Wire will now validate the document to set up the SAML connection.
+* If the data is valid, you will return to the Settings page.
+* The page shows the information you need to log in with SSO. Copy the login code or URL and send it to your team members or partners. For more information see: Logging in with SSO.
+
+TODO: Screenshots.
+
+What to expect after SSO is enabled: 
+
+Anyone with a login through your SAML identity provider (IDP) and with access to the Wire app will be able to register and log in to your team using the SSO Login URL and/or Code. Take care to share the code only with members of your team.
+
+When your team members create accounts on Wire using SSO, they will appear on the People tab of the team settings page.
+
+If team members already have Wire accounts, they will need to create new ones by registering with the SSO Login URL and/or Code. Existing Wire accounts cannot be bound to SSO logins.
+
+.. note::
+   This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
 
 SCIM user provisioning
 ======================
