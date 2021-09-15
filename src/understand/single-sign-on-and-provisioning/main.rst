@@ -34,7 +34,7 @@ Definitions
 
 These concepts need to be understood to use the present manual:
 
-TODO: Search-and-replace all terms from plain text to :term:`TERM`
+TODO: Search-and-replace all terms from plain text to : term : ` TERM `
 
 .. glossary::
 
@@ -96,7 +96,7 @@ TODO: Search-and-replace all terms from plain text to :term:`TERM`
    
        Running this command in a terminal would cause the ``:term:`Curl``` command to access this URL, and the API at that URL would execute the requested action.
    
-       -- `:term:`Curl` at Wikipedia <https://en.wikipedia.org/wiki/:term:`Curl`>`_
+       -- `:term:`Curl` at Wikipedia <https://en.wikipedia.org/wiki/Curl>`_
 
 
    Spar
@@ -154,7 +154,7 @@ IdP management (in team settings or via Curl)
 ---------------------------------------------
 
 * ``TODO``: CRUD: Create, Read, Update, Delete in team-settings (some of it is not implemented, also document the :term:`Curl` way for everything?)
-* ``TODO``: Deletion is tricky, but solved: the rest api end-point fails if the :term:`IdP` to be deleted is still authenticating active users in the team; but if you move all those users to other :term:`IdP`s, you can delete it.  
+* ``TODO``: Deletion is tricky, but solved: the rest api end-point fails if the :term:`IdP` to be deleted is still authenticating active users in the team; but if you move all those users to other IdPs, you can delete it.  
 * ``TODO``: There is also a `force` query parameter in the delete end-point that removes all dangling users instead of failing.  
 * ``TODO``: What's to be decided is how to add that to team settings. 
 * ``TODO``: Currently we need to fall back to the rest api for all this.
@@ -170,7 +170,7 @@ Authentication
 Setting up SSO externally
 -------------------------
 
-``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-:term:`SSO`-externally
+``TODO``: Integrate https://support.wire.com/hc/en-us/articles/360001285718-Set-up-SSO-externally
 
 To set up :term:`SSO` for a given Wire installation, the Team owner/administrator must enable it.
 
@@ -227,7 +227,7 @@ If team members already have Wire accounts, they will need to create new ones by
 Existing Wire accounts cannot be bound to :term:`SSO` logins.
 
 .. note::
-   This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-:term:`SSO`-internally
+   This section is a port of original instructions found at https://support.wire.com/hc/en-us/articles/360001285638-Set-up-SSO-internally
 
 SCIM user provisioning
 ======================
@@ -325,10 +325,10 @@ First, we need a little shell environment. Run the following in your terminal/sh
 
 
 .. note::
-   To learn more, read the original :term:`Curl`/SCMI documentation at: 
-   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-token.md
-   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/:term:`SCIM`-via-:term:`Curl`.md
-   If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/:term:`SCIM`.hs>`_ and `our h:term:`SCIM` library <https://github.com/wireapp/h:term:`SCIM`)>`_.
+   To learn more, read the original Curl/SCIM documentation at: 
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/SCIM-token.md
+   * https://github.com/wireapp/wire-server/blob/develop/docs/reference/provisioning/SCIM-via-Curl.md
+   If you want to dive into the backend code, start `reading here in our backend <https://github.com/wireapp/wire-server/blob/develop/services/spar/src/Spar/SCIM.hs>`_ and `our hSCIM library <https://github.com/wireapp/hSCIM>`_.
 
 SCIM + SSO
 ==========
