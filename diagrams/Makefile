@@ -6,5 +6,5 @@ compile:
 
 .PHONY: watch
 watch: compile
-	okular output.pdf &
+	xdg-open output.pdf &
 	find . | entr make compile
