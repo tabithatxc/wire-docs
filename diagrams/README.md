@@ -28,4 +28,5 @@ For more information, see syntax on https://mermaid-js.github.io/mermaid/#/seque
 * locally compile them with `./mmdc` to `svg`: [mmdc / mermaid-cli](https://github.com/mermaid-js/mermaid-cli)
     * `npm install @mermaid-js/mermaid-cli`
 * see mermaid [integrations](https://mermaid-js.github.io/mermaid/#/./integrations)
-* type 'make watch' if you have `mmdc` and `okular` and `entr` locally available for one option of a "save + autoreload" workflow.
+* type 'make watch' if you have `mmdc`, a pdf viewer (e.g. `okular` or similar) and `entr` locally available for one option of a "save + autoreload" workflow.
+    * another option is to write sphinx/rst files and use `make dev-run` from the top-level folder. That might be easier.
